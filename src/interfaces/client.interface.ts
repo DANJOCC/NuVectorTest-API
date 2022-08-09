@@ -1,4 +1,4 @@
-export default interface Client{
+export  interface Client{
     name:String,
     city:String,
     state:String,

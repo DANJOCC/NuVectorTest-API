@@ -1,4 +1,4 @@
-export default interface Project{
+export interface Project{
     client_Code:String,
     name:String,
     description:String,

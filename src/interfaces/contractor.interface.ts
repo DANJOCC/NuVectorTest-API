@@ -1,8 +1,8 @@
-export default interface Contractor{
-    firts_name:String,
-    last_name:String,
-    gender:String,
-    birthyear:String,
+export interface Contractor{
+    firts_name:string,
+    last_name:string,
+    gender:string,
+    birthyear:string,
     country:string,
     active:boolean
 }
