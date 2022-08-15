@@ -2,7 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import connection from './config/getDBConnection'
 import route from './routes'
-
+import cors from 'cors'
 const db=connection()
 
 db.on('open',()=>{
@@ -10,6 +10,8 @@ db.on('open',()=>{
 })
 
 const app=express()
+
+app.use(cors())
 
 app.set('port', process.env.PORT)
 

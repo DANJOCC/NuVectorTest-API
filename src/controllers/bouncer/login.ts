@@ -13,12 +13,12 @@ export async function login(req: Request, res:Response){
     const person=await user.findOne({email})
 
     if(person === null){
-        res.status(400).send("user cannot found")
+        res.status(400).send({msg:"user cannot found"})
         return
     }
 
     if(person?.password!==password){
-        res.status(400).send('wrong password')
+        res.status(400).send({msg:'wrong password'})
         return
     }
 
