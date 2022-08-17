@@ -5,6 +5,7 @@ export interface User{
 }
 
 export interface Admin extends User{
+    projects:Array<string>
 }
 
 export interface Contractor extends User{

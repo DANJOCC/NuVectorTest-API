@@ -13,7 +13,7 @@ export async function login(req: Request, res:Response){
     const person=await user.findOne({email})
 
     if(person === null){
-        res.status(400).send({msg:"user cannot found"})
+        res.status(400).send({msg:"There is not such an email signed in"})
         return
     }
 
@@ -25,12 +25,12 @@ export async function login(req: Request, res:Response){
     const isAdmin = await admin.findById(person._id)
 
     if(isAdmin===null){
-        const token= await sign({logged:true, admin: false})
-        res.status(200).send({id:person._id, username: person.username, token})
+        const token= await sign({id:person._id,logged:true, username: person.username,role:'CONTRACTOR'})
+        res.status(200).send({token})
         return
     }
-    const token= await sign({logged:true, admin: true})
-    res.status(200).send({id:person._id,username: person.username,token})
+    const token= await sign({id:person._id,logged:true,username: person.username, role: 'ADMIN'})
+    res.status(200).send({token})
 }
 
 export async function info(req: Request, res:Response) {
