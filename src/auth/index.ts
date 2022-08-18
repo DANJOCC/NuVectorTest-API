@@ -15,8 +15,6 @@ const sign= async (data:any)=>{
 
 const verify=async (token:string)=>{
     let pass=false
-
-    console.log(token)
     try {
         const {payload, protectedHeader}= await jose.jwtVerify(token, secretKey,{
             issuer:`${process.env.HOST}`

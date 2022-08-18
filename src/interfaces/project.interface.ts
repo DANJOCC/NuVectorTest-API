@@ -1,5 +1,5 @@
 export interface Project{
-    client_Code:String,
+    client_id:String,
     name:String,
     description:String,
     start:Date,

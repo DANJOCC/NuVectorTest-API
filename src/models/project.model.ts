@@ -2,7 +2,7 @@ import { model, Model, Schema } from "mongoose";
 import {Project} from "../interfaces"
 
 const projectSchema = new Schema<Project>({
-    client_Code:{type:String, required:true},
+    client_id:{type:Schema.Types.ObjectId, required:true},
     name:{type:String, required:true},
     description:{type:String, required:true},
     start:{type:Date, required:true},

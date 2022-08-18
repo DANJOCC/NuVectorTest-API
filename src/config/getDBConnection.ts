@@ -13,6 +13,6 @@ const connection=()=>{
     }
     const bdConnection=mongoose.connection
     return bdConnection
-}
+} 
 
 export default connection
