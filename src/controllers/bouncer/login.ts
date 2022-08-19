@@ -13,12 +13,12 @@ export async function login(req: Request, res:Response){
     const person=await user.findOne({email})
 
     if(person === null){
-        res.status(400).send({msg:"There is not such an email signed in"})
+        res.status(404).send({msg:"user not found"})
         return
     }
 
     if(person?.password!==password){
-        res.status(400).send({msg:'wrong password'})
+        res.status(200).send({msg:'wrong password'})
         return
     }
 
@@ -37,14 +37,14 @@ export async function info(req: Request, res:Response) {
     const {email}=req.body
 
     if( !(typeof email !== 'undefined')){
-        res.status(400).send("fill all inputs")
+        res.status(401).send("fill all inputs")
         return
     }
 
     const person=await user.findOne({email})
 
     if(person === null){
-        res.status(400).send("user cannot found")
+        res.status(400).send("user not found")
         return
     }
 

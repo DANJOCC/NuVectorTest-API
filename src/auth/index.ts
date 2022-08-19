@@ -1,5 +1,4 @@
 import * as jose from 'jose'
-import {createSecretKey} from 'crypto'
 
 const secretKey= new TextEncoder().encode(`${process.env.PRIVATE_KEY}`)
 

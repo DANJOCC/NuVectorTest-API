@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getActiveClientNames, getProjects, info, login, newProject } from "../controllers";
+import { getActiveClientNames, getProjects, info, login, newProject, getProject, getClient } from "../controllers";
 import verification from "../middlewares/verification";
 import multer from 'multer';
 
@@ -13,4 +13,6 @@ route.get('/info', verification, info)
 route.post('/newProject',verification,data.none(), newProject)
 route.get('/getClientsNames',verification ,getActiveClientNames)
 route.get('/getProjects/:id',verification,getProjects)
+route.get('/getProject/:id',verification,getProject)
+route.get('/getClient/:id',verification,getClient)
 export default route
