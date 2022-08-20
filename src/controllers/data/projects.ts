@@ -2,6 +2,36 @@ import { Request, Response } from "express";
 import { Project } from "../../interfaces";
 import { admin, project } from "../../models";
 
+function update(id:string,prop:string, data:any){
+    const opt={new:true}
+    const updateProp:{[key:string]:Function}={
+        'name':async ()=>{
+            return await project.findByIdAndUpdate(id,{name:data},opt)
+        },
+        'description':async ()=>{
+            return await project.findByIdAndUpdate(id,{description:data},opt)
+        },
+        'start':async ()=>{
+            return await project.findByIdAndUpdate(id,{start:new Date(data)},opt)
+        },
+        'end':async ()=>{
+            return await project.findByIdAndUpdate(id,{end:new Date(data)},opt)
+        },
+        'active':async ()=>{
+            return await project.findByIdAndUpdate(id,{active:data},opt)
+        },
+        'products':async ()=>{
+            return await project.findByIdAndUpdate(id,{products_Id:data},opt)
+        },
+        'activities':async ()=>{
+            return await project.findByIdAndUpdate(id,{products_Id:data},opt)
+        }
+    }
+
+   return updateProp[prop]()
+}
+
+
 export async function newProject(req:Request, res: Response) {
     const data=req.body;
     const userAdmin= await admin.findById(data.id);
@@ -69,4 +99,46 @@ export async function getProject(req:Request, res: Response) {
 
     res.status(200).send({project:theProject, client:theProject.client_id}) 
     
+}
+
+export async function updateProject(req:Request, res:Response) {
+    const {id,prop,data}=req.body
+    let theNewProject
+     try {
+           const aProject=await update(id,prop,data)
+
+        if(aProject === null){
+            res.status(404).send({msg:'project not found'});
+            return
+        }
+        theNewProject=aProject
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({msg:'there was a error, please try again later'})
+        return
+    }
+
+    res.status(200).send({newProject:theNewProject}) 
+}
+
+export async function DeleteProject(req:Request, res:Response) {
+    const {id}=req.body
+    let theNewProject
+     try {
+           const aProject=await project.findByIdAndDelete(id)
+
+        if(aProject === null){
+            res.status(404).send({msg:'project not found'});
+            return
+        }
+        theNewProject=aProject
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({msg:'there was a error, please try again later'})
+        return
+    }
+
+    res.status(200).send({name:theNewProject.name}) 
 }

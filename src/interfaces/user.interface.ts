@@ -9,7 +9,7 @@ export interface Admin extends User{
 }
 
 export interface Contractor extends User{
-    firts_name:string,
+    first_name:string,
     last_name:string,
     gender:string,
     birthyear:string,
