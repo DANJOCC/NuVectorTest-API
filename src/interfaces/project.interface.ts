@@ -5,7 +5,7 @@ export interface Project{
     start:Date,
     end:Date,
     active:boolean
-    products_Id:Array<String>
-    activities_Id:Array<String>
+    products_Id:Array<String | Object>
+    activities_Id:Array<String | Object>
 }
 

@@ -8,8 +8,14 @@ const projectSchema = new Schema<Project>({
     start:{type:Date, required:true},
     end:{type:Date, required:true},
     active:{type:Boolean, required:true},
-    products_Id:{type:[String]},
-    activities_Id:{type:[String]}
+    products_Id:[{
+        type:Schema.Types.ObjectId,
+        ref:"products"
+    }],
+    activities_Id:[{
+        type:Schema.Types.ObjectId,
+        ref:"activities"
+    }]
 });
 
 export const project: Model<Project> = model('projects',projectSchema);

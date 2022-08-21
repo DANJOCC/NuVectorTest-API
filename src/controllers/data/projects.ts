@@ -1,35 +1,6 @@
 import { Request, Response } from "express";
 import { Project } from "../../interfaces";
-import { admin, project } from "../../models";
-
-function update(id:string,prop:string, data:any){
-    const opt={new:true}
-    const updateProp:{[key:string]:Function}={
-        'name':async ()=>{
-            return await project.findByIdAndUpdate(id,{name:data},opt)
-        },
-        'description':async ()=>{
-            return await project.findByIdAndUpdate(id,{description:data},opt)
-        },
-        'start':async ()=>{
-            return await project.findByIdAndUpdate(id,{start:new Date(data)},opt)
-        },
-        'end':async ()=>{
-            return await project.findByIdAndUpdate(id,{end:new Date(data)},opt)
-        },
-        'active':async ()=>{
-            return await project.findByIdAndUpdate(id,{active:data},opt)
-        },
-        'products':async ()=>{
-            return await project.findByIdAndUpdate(id,{products_Id:data},opt)
-        },
-        'activities':async ()=>{
-            return await project.findByIdAndUpdate(id,{products_Id:data},opt)
-        }
-    }
-
-   return updateProp[prop]()
-}
+import { admin, project, activity, product, contractor } from "../../models";
 
 
 export async function newProject(req:Request, res: Response) {
@@ -65,6 +36,15 @@ export async function getProjects(req:Request, res: Response) {
     try {
         const userAdmin= await admin.findById(id).populate('projects');
         if(userAdmin === null){
+            const userContractor= await contractor.findById(id)
+            if(userContractor!==null){
+                const ArrayProjects=await project.find({active:true})
+                ArrayProjects.map((value)=>{
+                    projects.push(value)
+                })
+              return  res.status(200).send({projects})
+            }
+                
             res.status(404).send({msg:'user not found'});
             return
         }
@@ -83,7 +63,7 @@ export async function getProject(req:Request, res: Response) {
     const id=req.params.id;
     let theProject:Project
     try {
-        const aProject= await project.findById(id).populate('client_id')
+        const aProject= await project.findById(id).populate('client_id').populate('products_Id').populate('activities_Id').exec()
 
         if(aProject === null){
             res.status(404).send({msg:'project not found'});
@@ -97,21 +77,29 @@ export async function getProject(req:Request, res: Response) {
         return
     }
 
-    res.status(200).send({project:theProject, client:theProject.client_id}) 
-    
+    res.status(200).send({project:theProject,
+         client:theProject.client_id, 
+         products:theProject.products_Id, 
+         activities:theProject.activities_Id}) 
 }
 
 export async function updateProject(req:Request, res:Response) {
-    const {id,prop,data}=req.body
+    const {id}=req.body
+    console.log(req.body.active)
     let theNewProject
      try {
-           const aProject=await update(id,prop,data)
-
+           const aProject=await project.findById(id)
         if(aProject === null){
             res.status(404).send({msg:'project not found'});
             return
         }
+        aProject.name=req.body.name
+        aProject.description=req.body.description
+        aProject.start=req.body.start
+        aProject.end=req.body.end
+        aProject.active=req.body.active
         theNewProject=aProject
+        aProject.save()
 
     } catch (error) {
         console.log(error)
