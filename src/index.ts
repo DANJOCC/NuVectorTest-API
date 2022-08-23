@@ -1,4 +1,4 @@
-import 'dotenv/config'
+
 import express from 'express'
 import connection from './config/getDBConnection'
 import cors from 'cors'
