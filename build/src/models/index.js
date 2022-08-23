@@ -21,3 +21,4 @@ __exportStar(require("./project.model"), exports);
 __exportStar(require("./client.model"), exports);
 __exportStar(require("./products.model"), exports);
 __exportStar(require("./activities.model"), exports);
+__exportStar(require("./category.model"), exports);

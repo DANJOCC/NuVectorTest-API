@@ -9,6 +9,7 @@ const adminSchema = new mongoose_1.Schema({
     projects: [{
             type: mongoose_1.Schema.Types.ObjectId,
             ref: "projects"
-        }]
+        }],
+    active: { type: Boolean, required: true }
 });
 exports.admin = (0, mongoose_1.model)('Admin', adminSchema);

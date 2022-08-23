@@ -8,7 +8,8 @@ const adminSchema = new Schema<Admin>({
     projects:[{
         type:Schema.Types.ObjectId,
         ref:"projects"
-    }]
+    }],
+    active:{type:Boolean, required:true}
 });
 
 export const admin: Model<Admin> = model('Admin',adminSchema);

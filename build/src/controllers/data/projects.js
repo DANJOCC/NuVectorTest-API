@@ -93,7 +93,6 @@ exports.getProject = getProject;
 function updateProject(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { id } = req.body;
-        console.log(req.body.active);
         let theNewProject;
         try {
             const aProject = yield models_1.project.findById(id);

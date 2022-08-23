@@ -7,14 +7,14 @@ const stackSchema = new Schema<Task>({
     date:{type:Date, required:true},
     duration:{type:Number, required:true},
     billable:{type:Boolean, required:true},
-    contractor_id:{type:Schema.Types.ObjectId,ref:'clients',required:true},
-    client_id:{type:Schema.Types.ObjectId,ref:'clients',required:true},
-    project_id:{type:Schema.Types.ObjectId,ref:'projects',required:true},
-    product_id:{type:Schema.Types.ObjectId,ref:'products',required:true},
-    activity_id:{type:Schema.Types.ObjectId,ref:'projects',required:true},
-    category_id:{type:Schema.Types.ObjectId,ref:'projects',required:true}
+    contractor_name:{type:String,},
+    client_name:{type:String,},
+    project_name:{type:String,},
+    product_name:{type:String,},
+    activity_name:{type:String,},
+    category_name:{type:String,}
 
     
 });
 
-export const task: Model<Task> = model('projects',stackSchema);
+export const task: Model<Task> = model('tasks',stackSchema);

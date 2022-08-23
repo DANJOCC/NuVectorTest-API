@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Client } from "../../interfaces";
-import { client } from "../../models";
+import { client} from "../../models";
+
 
 export async function getActiveClientNames(req:Request,res:Response) {
     const client_Names:Array<Object>=[]

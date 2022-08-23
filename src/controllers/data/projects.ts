@@ -85,7 +85,6 @@ export async function getProject(req:Request, res: Response) {
 
 export async function updateProject(req:Request, res:Response) {
     const {id}=req.body
-    console.log(req.body.active)
     let theNewProject
      try {
            const aProject=await project.findById(id)

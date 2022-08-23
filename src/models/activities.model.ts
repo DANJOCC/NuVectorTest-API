@@ -1,5 +1,5 @@
 import { model, Model, Schema } from "mongoose";
-import { Activity, Product } from "../interfaces"
+import { Activity } from "../interfaces"
 
 const activitySchema = new Schema<Activity>({
     name:{type:String, required:true},

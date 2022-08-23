@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./bouncer/login"), exports);
 __exportStar(require("./data/clients"), exports);
 __exportStar(require("./data/projects"), exports);
+__exportStar(require("./data/task"), exports);

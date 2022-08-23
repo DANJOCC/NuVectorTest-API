@@ -8,10 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.info = exports.login = void 0;
 const models_1 = require("../../models");
 const auth_1 = require("../../auth");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { email, password } = req.body;
@@ -24,8 +28,8 @@ function login(req, res) {
             res.status(404).send({ msg: "user not found" });
             return;
         }
-        if ((person === null || person === void 0 ? void 0 : person.password) !== password) {
-            res.status(200).send({ msg: 'wrong password' });
+        if (!bcrypt_1.default.compareSync(password, person.password)) {
+            res.status(404).send({ msg: 'wrong password' });
             return;
         }
         const isAdmin = yield models_1.admin.findById(person._id);

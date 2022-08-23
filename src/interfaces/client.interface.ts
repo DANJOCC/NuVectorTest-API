@@ -1,10 +1,10 @@
 export  interface Client{
-    code:Number
+    client:String
     name:String,
     city:String,
     state:String,
     country:String,
-    industry_code:String,
+    industry:String,
     active:boolean,
     projects_id:Array<string>
 }

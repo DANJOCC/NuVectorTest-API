@@ -7,11 +7,11 @@ const stackSchema = new mongoose_1.Schema({
     date: { type: Date, required: true },
     duration: { type: Number, required: true },
     billable: { type: Boolean, required: true },
-    contractor_id: { type: mongoose_1.Schema.Types.ObjectId, ref: 'clients', required: true },
-    client_id: { type: mongoose_1.Schema.Types.ObjectId, ref: 'clients', required: true },
-    project_id: { type: mongoose_1.Schema.Types.ObjectId, ref: 'projects', required: true },
-    product_id: { type: mongoose_1.Schema.Types.ObjectId, ref: 'products', required: true },
-    activity_id: { type: mongoose_1.Schema.Types.ObjectId, ref: 'projects', required: true },
-    category_id: { type: mongoose_1.Schema.Types.ObjectId, ref: 'projects', required: true }
+    contractor_name: { type: String, },
+    client_name: { type: String, },
+    project_name: { type: String, },
+    product_name: { type: String, },
+    activity_name: { type: String, },
+    category_name: { type: String, }
 });
-exports.task = (0, mongoose_1.model)('projects', stackSchema);
+exports.task = (0, mongoose_1.model)('tasks', stackSchema);
